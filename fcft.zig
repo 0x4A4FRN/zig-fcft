@@ -75,7 +75,7 @@ pub const Tag = extern struct {
 };
 
 pub const TextRun = extern struct {
-    glyphs: [*][*]const Glyphs,
+    glyphs: [*][*]const Glyph,
     cluster: [*]c_int,
     count: usize,
 
