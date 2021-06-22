@@ -71,8 +71,8 @@ pub const Grapheme = extern struct {
     count: usize,
     glyphs: [*]const *Glyph,
 
-    extern fn fcft_grapheme_rasterize(font: *Font, len: usize, grapheme_cluster: [*]const u8, tag_count: usize, tags: [*]const Tag, subpixel: Subpixel) ?*Grapheme;
-    pub fn rasterize(font: *Font, grapheme_cluster: []const u8, tags: []const Tag, subpixel: Subpixel) !*Grapheme {
+    extern fn fcft_grapheme_rasterize(font: *Font, len: usize, grapheme_cluster: [*]const c_int, tag_count: usize, tags: [*]const Tag, subpixel: Subpixel) ?*Grapheme;
+    pub fn rasterize(font: *Font, grapheme_cluster: []const c_int, tags: []const Tag, subpixel: Subpixel) !*Grapheme {
         const res = fcft_grapheme_rasterize(font, grapheme_cluster.len, grapheme_cluster.ptr, tags.len, tags.ptr, subpixel);
         return if (res) |grapheme| grapheme else error.Generic;
     }
@@ -88,8 +88,8 @@ pub const TextRun = extern struct {
     cluster: [*]c_int,
     count: usize,
 
-    extern fn fcft_text_run_rasterize(font: *Font, len: usize, text: [*]const u8, subpixel: Subpixel) ?*TextRun;
-    pub fn rasterize(font: *Font, text: []const u8, subpixel: Subpixel) !*TextRun {
+    extern fn fcft_text_run_rasterize(font: *Font, len: usize, text: [*]const c_int, subpixel: Subpixel) ?*TextRun;
+    pub fn rasterize(font: *Font, text: []const c_int, subpixel: Subpixel) !*TextRun {
         const res = fcft_text_run_rasterize(font, text.len, text.ptr, subpixel);
         return if (res) |run| run else error.Generic;
     }
