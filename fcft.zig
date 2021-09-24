@@ -98,7 +98,7 @@ pub const TextRun = extern struct {
     pub const destroy = fcft_text_run_destroy;
 };
 
-extern fn fcft_kerning(font: *Font, left: c_int, right: c_int, noalias x: *c_long, noalias y: *c_long) bool;
+extern fn fcft_kerning(font: *Font, left: c_int, right: c_int, noalias x: ?*c_long, noalias y: ?*c_long) bool;
 pub const kerning = fcft_kerning;
 
 extern fn fcft_precompose(font: *const Font, base: c_int, comb: c_int, base_is_from_primary: bool, comb_is_from_primary: bool, composed_is_from_primary: bool) c_int;
