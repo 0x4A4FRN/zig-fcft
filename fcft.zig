@@ -1,6 +1,6 @@
 const pixman = @import("pixman");
 
-pub const Error = error {
+pub const Error = error{
     Generic,
 };
 
