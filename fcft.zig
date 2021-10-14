@@ -1,7 +1,10 @@
 const pixman = @import("pixman");
 
 pub const Error = error{
-    Generic,
+    NoFont,
+    NoGlyph,
+    NoGrapheme,
+    NoTextRun,
 };
 
 pub const Subpixel = extern enum {
@@ -30,7 +33,7 @@ pub const Font = extern struct {
     extern fn fcft_from_name(count: usize, names: [*][*:0]const u8, attributes: ?[*:0]u8) ?*Font;
     pub fn fromName(names: [][*:0]const u8, attributes: ?[*:0]u8) !*Font {
         const res = fcft_from_name(names.len, names.ptr, attributes);
-        return if (res) |font| font else error.Generic;
+        return if (res) |font| font else error.NoFont;
     }
 
     extern fn fcft_clone(self: *const Font) ?*Font;
@@ -61,7 +64,7 @@ pub const Glyph = extern struct {
     extern fn fcft_glyph_rasterize(font: *Font, wc: c_int, subpixel: Subpixel) ?*Glyph;
     pub fn rasterize(font: *Font, wc: c_int, subpixel: Subpixel) !*Glyph {
         const res = fcft_glyph_rasterize(font, wc, subpixel);
-        return if (res) |glyph| glyph else error.Generic;
+        return if (res) |glyph| glyph else error.NoGlyph;
     }
 };
 
@@ -74,7 +77,7 @@ pub const Grapheme = extern struct {
     extern fn fcft_grapheme_rasterize(font: *Font, len: usize, grapheme_cluster: [*]const c_int, tag_count: usize, tags: [*]const Tag, subpixel: Subpixel) ?*Grapheme;
     pub fn rasterize(font: *Font, grapheme_cluster: []const c_int, tags: []const Tag, subpixel: Subpixel) !*Grapheme {
         const res = fcft_grapheme_rasterize(font, grapheme_cluster.len, grapheme_cluster.ptr, tags.len, tags.ptr, subpixel);
-        return if (res) |grapheme| grapheme else error.Generic;
+        return if (res) |grapheme| grapheme else error.NoGrapheme;
     }
 };
 
@@ -91,7 +94,7 @@ pub const TextRun = extern struct {
     extern fn fcft_text_run_rasterize(font: *Font, len: usize, text: [*]const c_int, subpixel: Subpixel) ?*TextRun;
     pub fn rasterize(font: *Font, text: []const c_int, subpixel: Subpixel) !*TextRun {
         const res = fcft_text_run_rasterize(font, text.len, text.ptr, subpixel);
-        return if (res) |run| run else error.Generic;
+        return if (res) |run| run else error.NoTextRun;
     }
 
     extern fn fcft_text_run_destroy(run: *TextRun) void;
