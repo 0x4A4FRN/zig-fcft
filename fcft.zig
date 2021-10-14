@@ -30,8 +30,8 @@ pub const Font = extern struct {
 
     subpixel: Subpixel,
 
-    extern fn fcft_from_name(count: usize, names: [*][*:0]const u8, attributes: ?[*:0]u8) ?*Font;
-    pub fn fromName(names: [][*:0]const u8, attributes: ?[*:0]u8) !*Font {
+    extern fn fcft_from_name(count: usize, names: [*][*:0]const u8, attributes: ?[*:0]const u8) ?*Font;
+    pub fn fromName(names: [][*:0]const u8, attributes: ?[*:0]const u8) !*Font {
         const res = fcft_from_name(names.len, names.ptr, attributes);
         return if (res) |font| font else error.NoFont;
     }
