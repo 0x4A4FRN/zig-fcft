@@ -6,5 +6,5 @@ Idiomatic [Zig](https://ziglang.org/) bindings for
 ## Dependencies
 
 * [zig](https://ziglang.org/) 0.8.0
-* [fcft](https://codeberg.org/dnkl/fcft) 2.4.0
+* [fcft](https://codeberg.org/dnkl/fcft) 2.5.0
 * [zig-pixman](https://github.com/ifreund/zig-pixman)

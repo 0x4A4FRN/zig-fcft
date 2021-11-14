@@ -7,6 +7,7 @@ pub const Error = error{
     NoTextRun,
 };
 
+// Note that this is *ignored* if antialiasing has been disabled.
 pub const Subpixel = extern enum {
     default,
     none,
@@ -21,10 +22,27 @@ pub const Font = extern struct {
     descent: c_int,
     ascent: c_int,
 
-    max_advance: extern struct { x: c_int, y: c_int },
-    space_advance: extern struct { x: c_int, y: c_int },
-    underline: extern struct { position: c_int, thickness: c_int },
-    strikeout: extern struct { position: c_int, thickness: c_int },
+    // Width/height of font's widest glyph.
+    max_advance: extern struct {
+        x: c_int,
+        y: c_int,
+    },
+
+    // Width/height of space (0x20), if available, -1 otherwise.
+    space_advance: extern struct {
+        x: c_int,
+        y: c_int,
+    },
+
+    underline: extern struct {
+        position: c_int,
+        thickness: c_int,
+    },
+
+    strikeout: extern struct {
+        position: c_int,
+        thickness: c_int,
+    },
 
     antialias: bool,
 
@@ -115,8 +133,21 @@ pub const ScalingFilter = extern enum {
     lanczos3,
 };
 
+// Note: this function does not clear any caches - call *before*
+// rasterizing any glyphs!
 extern fn fcft_set_scaling_filter(filter: ScalingFilter) bool;
 pub const setScalingFilter = fcft_set_scaling_filter;
+
+pub const EmojiPresentation = extern enum {
+    default,
+    text,
+    emoji,
+};
+
+// Note: this function does *not* clear the glyph or grapheme caches -
+// call *before* rasterizing any glyphs!
+extern fn fcft_set_emoji_presentation(font: *Font, presentation: EmojiPresentation) void;
+pub const setEmojiPresentation = fcft_set_emoji_presentation;
 
 pub const LogColorize = extern enum {
     never,
