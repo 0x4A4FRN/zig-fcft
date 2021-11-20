@@ -1,6 +1,8 @@
 Idiomatic [Zig](https://ziglang.org/) bindings for
 [fcft](https://codeberg.org/dnkl/fcft).
 
+Fork of https://git.sr.ht/~andreafeletto/zig-fcft
+
 # Dependencies
 
 -   [zig](https://ziglang.org/) 0.8.1
@@ -59,12 +61,13 @@ git config format.subjectPrefix "PATCH zig-fcft"
 ```
 
 See [here] for some great resource on how to use `git send-email`
-if you're not used to it.
+if you're not used to it, and my [wiki][].
 
 [plain text]: https://useplaintext.email/
-[here]: https://git-send-email.io
 [public inbox]: https://lists.sr.ht/~novakane/public-inbox
 [~novakane/public-inbox@lists.sr.ht]: mailto:~novakane/public-inbox@lists.sr.ht
+[here]: https://git-send-email.io
+[wiki]: https://man.sr.ht/~novakane/guides/
 
 # License
 
