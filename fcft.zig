@@ -8,7 +8,7 @@ pub const Error = error{
 };
 
 // Note that this is *ignored* if antialiasing has been disabled.
-pub const Subpixel = extern enum {
+pub const Subpixel = enum(c_int) {
     default,
     none,
     horizontal_rgb,
@@ -61,7 +61,7 @@ pub const Font = extern struct {
     pub const destroy = fcft_destroy;
 };
 
-pub const Capabilities = extern enum {
+pub const Capabilities = enum(c_int) {
     grapheme_shaping = 0x1,
     text_run_shaping = 0x2,
 };
@@ -125,7 +125,7 @@ pub const kerning = fcft_kerning;
 extern fn fcft_precompose(font: *const Font, base: c_int, comb: c_int, base_is_from_primary: bool, comb_is_from_primary: bool, composed_is_from_primary: bool) c_int;
 pub const precompose = fcft_precompose;
 
-pub const ScalingFilter = extern enum {
+pub const ScalingFilter = enum(c_int) {
     none,
     nearest,
     bilinear,
@@ -138,7 +138,7 @@ pub const ScalingFilter = extern enum {
 extern fn fcft_set_scaling_filter(filter: ScalingFilter) bool;
 pub const setScalingFilter = fcft_set_scaling_filter;
 
-pub const EmojiPresentation = extern enum {
+pub const EmojiPresentation = enum(c_int) {
     default,
     text,
     emoji,
@@ -149,13 +149,13 @@ pub const EmojiPresentation = extern enum {
 extern fn fcft_set_emoji_presentation(font: *Font, presentation: EmojiPresentation) void;
 pub const setEmojiPresentation = fcft_set_emoji_presentation;
 
-pub const LogColorize = extern enum {
+pub const LogColorize = enum(c_int) {
     never,
     always,
     auto,
 };
 
-pub const LogClass = extern enum {
+pub const LogClass = enum(c_int) {
     none,
     err,
     warning,

@@ -1,15 +1,14 @@
-Idiomatic [Zig](https://ziglang.org/) bindings for
-[fcft](https://codeberg.org/dnkl/fcft).
+Idiomatic [zig] bindings for [fcft].
 
 Fork of https://git.sr.ht/~andreafeletto/zig-fcft
 
-# Dependencies
+## Dependencies
 
--   [zig](https://ziglang.org/) 0.8.1
--   [fcft](https://codeberg.org/dnkl/fcft) 2.5.0
--   [zig-pixman](https://github.com/ifreund/zig-pixman)
+-   [zig] 0.9
+-   [fcft] 2.5.1
+-   [zig-pixman]
 
-# Usage
+## Usage
 
 `build.zig` example:
 
@@ -26,14 +25,14 @@ pub fn build(b: *std.build.Builder) void {
 
     const pixman = std.build.Pkg{
         .name = "pixman",
-        .path = "deps/zig-pixman/pixman.zig",
+        .path = .{ .path = "deps/zig-pixman/pixman.zig" },
     };
     exe.addPackage(pixman);
     exe.linkSystemLibrary("pixman-1");
 
     const fcft = std.build.Pkg{
         .name = "fcft",
-        .path = "deps/zig-fcft/fcft.zig",
+        .path = .{ .path = "deps/zig-fcft/fcft.zig" },
         .dependencies = &[_]std.build.Pkg{pixman},
     };
     exe.addPackage(fcft);
@@ -49,28 +48,30 @@ pub fn build(b: *std.build.Builder) void {
 }
 ```
 
-# Contributing
+## Contributing
 
 For patches, questions or discussion send a [plain text] mail to my
-[public inbox][] [~novakane/public-inbox@lists.sr.ht][] with project
+[public inbox] [~novakane/public-inbox@lists.sr.ht] with project
 prefix set to `zig-fcft`:
 
-```
+```bash
 git config sendemail.to "~novakane/public-inbox@lists.sr.ht"
 git config format.subjectPrefix "PATCH zig-fcft"
 ```
 
 See [here] for some great resource on how to use `git send-email`
-if you're not used to it, and my [wiki][].
+if you're not used to it, and my [wiki].
 
+## License
+
+[MIT]
+
+[zig]: https://ziglang.org/download/
+[fcft]: https://codeberg.org/dnkl/fcft
+[zig-pixman]: https://github.com/ifreund/zig-pixman
 [plain text]: https://useplaintext.email/
 [public inbox]: https://lists.sr.ht/~novakane/public-inbox
 [~novakane/public-inbox@lists.sr.ht]: mailto:~novakane/public-inbox@lists.sr.ht
 [here]: https://git-send-email.io
 [wiki]: https://man.sr.ht/~novakane/guides/
-
-# License
-
-[MIT][]
-
-[mit]: LICENSE
+[mit]: COPYING
