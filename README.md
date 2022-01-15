@@ -1,11 +1,9 @@
 Idiomatic [zig] bindings for [fcft].
 
-Fork of https://git.sr.ht/~andreafeletto/zig-fcft
-
 ## Dependencies
 
 -   [zig] 0.9
--   [fcft] 2.5.1
+-   [fcft] 3.0.0
 -   [zig-pixman]
 
 ## Usage
@@ -62,9 +60,13 @@ git config format.subjectPrefix "PATCH zig-fcft"
 See [here] for some great resource on how to use `git send-email`
 if you're not used to it, and my [wiki].
 
+## Acknowledgement
+
+Started with a fork of https://git.sr.ht/~andreafeletto/zig-fcft
+
 ## License
 
-[MIT]
+zig-fcft is licensed under the [MIT] license.
 
 [zig]: https://ziglang.org/download/
 [fcft]: https://codeberg.org/dnkl/fcft
