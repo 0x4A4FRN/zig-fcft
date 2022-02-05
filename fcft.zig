@@ -60,7 +60,7 @@ pub const TextRun = extern struct {
 
 pub const Font = extern struct {
     // Name of the primary font only.
-    name: [*:0]const u8,
+    name: ?[*:0]const u8,
 
     height: c_int,
     descent: c_int,
