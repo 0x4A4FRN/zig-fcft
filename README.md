@@ -8,6 +8,8 @@ Idiomatic [zig] bindings for [fcft].
 
 ## Usage
 
+See the [example] repo for a more complete help.
+
 `build.zig` example:
 
 ```zig
@@ -71,6 +73,7 @@ zig-fcft is licensed under the [MIT] license.
 [zig]: https://ziglang.org/download/
 [fcft]: https://codeberg.org/dnkl/fcft
 [zig-pixman]: https://github.com/ifreund/zig-pixman
+[example]: https://git.sr.ht/~novakane/zig-fcft-example
 [plain text]: https://useplaintext.email/
 [public inbox]: https://lists.sr.ht/~novakane/public-inbox
 [~novakane/public-inbox@lists.sr.ht]: mailto:~novakane/public-inbox@lists.sr.ht
