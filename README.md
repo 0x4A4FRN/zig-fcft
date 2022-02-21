@@ -3,7 +3,7 @@ Idiomatic [zig] bindings for [fcft].
 ## Dependencies
 
 -   [zig] 0.9
--   [fcft] 3.0.0
+-   [fcft] 3.0.1
 -   [zig-pixman]
 
 ## Usage
@@ -59,8 +59,9 @@ git config sendemail.to "~novakane/public-inbox@lists.sr.ht"
 git config format.subjectPrefix "PATCH zig-fcft"
 ```
 
-See [here] for some great resource on how to use `git send-email`
-if you're not used to it, and my [wiki].
+See [here] for some great resource on how to use `git send-email` if you're
+not used to it. You can also have look at my [contributing guide] and [style
+guide] for zig.
 
 ## Acknowledgement
 
@@ -78,5 +79,6 @@ zig-fcft is licensed under the [MIT] license.
 [public inbox]: https://lists.sr.ht/~novakane/public-inbox
 [~novakane/public-inbox@lists.sr.ht]: mailto:~novakane/public-inbox@lists.sr.ht
 [here]: https://git-send-email.io
-[wiki]: https://man.sr.ht/~novakane/guides/
+[contributing guide]: https://man.sr.ht/~novakane/guides/contributing.md
+[style guide]: https://man.sr.ht/~novakane/guides/lang/zig.md
 [mit]: COPYING
