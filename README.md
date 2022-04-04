@@ -50,18 +50,7 @@ pub fn build(b: *std.build.Builder) void {
 
 ## Contributing
 
-For patches, questions or discussion send a [plain text] mail to my
-[public inbox] [~novakane/public-inbox@lists.sr.ht] with project
-prefix set to `zig-fcft`:
-
-```bash
-git config sendemail.to "~novakane/public-inbox@lists.sr.ht"
-git config format.subjectPrefix "PATCH zig-fcft"
-```
-
-See [here] for some great resource on how to use `git send-email` if you're
-not used to it. You can also have look at my [contributing guide] and [style
-guide] for zig.
+See [CONTRIBUTING.md]
 
 ## Acknowledgement
 
@@ -75,10 +64,5 @@ zig-fcft is licensed under the [MIT] license.
 [fcft]: https://codeberg.org/dnkl/fcft
 [zig-pixman]: https://github.com/ifreund/zig-pixman
 [example]: https://git.sr.ht/~novakane/zig-fcft-example
-[plain text]: https://useplaintext.email/
-[public inbox]: https://lists.sr.ht/~novakane/public-inbox
-[~novakane/public-inbox@lists.sr.ht]: mailto:~novakane/public-inbox@lists.sr.ht
-[here]: https://git-send-email.io
-[contributing guide]: https://man.sr.ht/~novakane/guides/contributing.md
-[style guide]: https://man.sr.ht/~novakane/guides/lang/zig.md
+[contributing.md]: CONTRIBUTING.md
 [mit]: COPYING
