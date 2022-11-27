@@ -2,7 +2,7 @@ Idiomatic [zig] bindings for [fcft].
 
 ## Dependencies
 
--   [zig] 0.9
+-   [zig] 0.10
 -   [fcft] 3.0.1
 -   [zig-pixman]
 
