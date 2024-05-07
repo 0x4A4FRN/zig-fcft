@@ -1,0 +1,16 @@
+.{
+    .name = "zig-fcft",
+    .version = "1.0.0",
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "COPYING",
+        "fcft.zig",
+    },
+    .dependencies = .{
+        .@"zig-pixman" = .{
+            .url = "https://codeberg.org/ifreund/zig-pixman/archive/92b2212565ba46d24b757c5c46122339a9471fa4.tar.gz",
+            .hash = "12207ddc241c6bd78ab2fd134464d7487329c1329d1c32355c0a616446a47ded174e",
+        },
+    },
+}
