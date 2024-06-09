@@ -4,7 +4,7 @@ const Build = std.Build;
 pub fn build(b: *Build) !void {
     const pixman = b.dependency("zig-pixman", .{}).module("pixman");
     _ = b.addModule("fcft", .{
-        .root_source_file = .{ .path = "fcft.zig" },
+        .root_source_file = b.path("fcft.zig"),
         .imports = &.{
             .{ .name = "pixman", .module = pixman },
         },
