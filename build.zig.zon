@@ -1,5 +1,5 @@
 .{
-    .name = "zig-fcft",
+    .name = .fcft,
     .version = "1.1.0",
     .paths = .{
         "build.zig",
@@ -8,9 +8,10 @@
         "fcft.zig",
     },
     .dependencies = .{
-        .@"zig-pixman" = .{
-            .url = "https://codeberg.org/ifreund/zig-pixman/archive/v0.2.0.tar.gz",
-            .hash = "12209db20ce873af176138b76632931def33a10539387cba745db72933c43d274d56",
+        .pixman = .{
+            .url = "https://codeberg.org/ifreund/zig-pixman/archive/v0.3.0.tar.gz",
+            .hash = "pixman-0.3.0-LClMnz2VAAAs7QSCGwLimV5VUYx0JFnX5xWU6HwtMuDX",
         },
     },
+    .fingerprint = 0x11577bbe0b7acccd,
 }
