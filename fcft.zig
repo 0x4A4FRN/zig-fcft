@@ -7,12 +7,6 @@ pub const Error = error{
     NoTextRun,
 };
 
-pub const EmojiPresentation = enum(c_int) {
-    default,
-    text,
-    emoji,
-};
-
 // Note that this is ignored if antialiasing has been disabled.
 pub const Subpixel = enum(c_int) {
     default,
@@ -41,6 +35,9 @@ pub const Glyph = extern struct {
         x: c_int,
         y: c_int,
     },
+
+    // To be blended, instead of used as mask
+    is_color_glyph: bool,
 };
 
 pub const Grapheme = extern struct {
@@ -154,10 +151,59 @@ pub const Font = extern struct {
     ) u32;
     pub const precompose = fcft_precompose;
 
+    // DEPRECATED in 3.2.0
     // Note: this function does not clear the glyph or grapheme caches, call
     // before rasterizing any glyphs.
     extern fn fcft_set_emoji_presentation(self: *Font, presentation: EmojiPresentation) void;
     pub const setEmojiPresentation = fcft_set_emoji_presentation;
+};
+
+pub const EmojiPresentation = enum(c_int) {
+    default,
+    text,
+    emoji,
+};
+
+pub const ScalingFilter = enum(c_int) {
+    none,
+    nearest,
+    bilinear,
+    // Separable convolution filters
+    cubic,
+    lanczos3,
+    // ADDED in 3.3.0
+    impulse,
+    box,
+    linear,
+    gaussian,
+    lanczos2,
+    lanczos3_stretched,
+};
+
+// ADDED in 3.2.0
+pub const FontOptions = extern struct {
+    emoji_presentation: EmojiPresentation,
+    color_glyphs: extern struct {
+        srgb_decode: bool,
+        format: pixman.FormatCode,
+    },
+    scaling_filter: ScalingFilter,
+
+    extern fn fcft_font_options_create() *FontOptions;
+    pub const create = fcft_font_options_create;
+
+    extern fn fcft_font_options_destroy(options: *FontOptions) void;
+    pub const destroy = fcft_font_options_destroy;
+
+    extern fn fcft_from_name2(
+        options: *const FontOptions,
+        count: usize,
+        names: [*][*:0]const u8,
+        attributes: ?[*:0]const u8,
+    ) ?*Font;
+    pub fn fromName2(options: *const FontOptions, names: [][*:0]const u8, attributes: ?[*:0]const u8) !*Font {
+        return fcft_from_name2(names.len, names.ptr, attributes, options) orelse error.NoFont;
+    }
 };
 
 pub const LogColorize = enum(c_int) {
@@ -185,19 +231,13 @@ pub const fini = fcft_fini;
 pub const Capabilities = struct {
     pub const grapheme_shaping = 1 << 0;
     pub const text_run_shaping = 1 << 1;
+    pub const svg = 1 << 2;
 };
 
 extern fn fcft_capabilities() u32;
 pub const capabilities = fcft_capabilities;
 
-pub const ScalingFilter = enum(c_int) {
-    none,
-    nearest,
-    bilinear,
-    cubic,
-    lanczos3,
-};
-
+// DEPRECATED in 3.3.0
 // Note: this function does not clear any caches, call before
 // rasterizing any glyphs.
 extern fn fcft_set_scaling_filter(filter: ScalingFilter) bool;
