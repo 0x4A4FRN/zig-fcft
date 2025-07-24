@@ -51,7 +51,7 @@ pub const TextRun = extern struct {
     cluster: [*]c_int,
     count: usize,
 
-    extern fn fcft_text_run_destroy(self: *const TextRun) void;
+    extern fn fcft_text_run_destroy(text_run: *const TextRun) void;
     pub const destroy = fcft_text_run_destroy;
 };
 
@@ -92,30 +92,30 @@ pub const Font = extern struct {
         return fcft_from_name(names.len, names.ptr, attributes) orelse error.NoFont;
     }
 
-    extern fn fcft_clone(self: *const Font) ?*Font;
+    extern fn fcft_clone(font: *const Font) ?*Font;
     pub const clone = fcft_clone;
 
-    extern fn fcft_destroy(self: *Font) void;
+    extern fn fcft_destroy(font: *Font) void;
     pub const destroy = fcft_destroy;
 
-    extern fn fcft_rasterize_char_utf32(self: *Font, cp: u32, subpixel: Subpixel) ?*const Glyph;
-    pub fn rasterizeCharUtf32(self: *Font, cp: u32, subpixel: Subpixel) !*const Glyph {
-        return fcft_rasterize_char_utf32(self, cp, subpixel) orelse error.NoGlyph;
+    extern fn fcft_rasterize_char_utf32(font: *Font, cp: u32, subpixel: Subpixel) ?*const Glyph;
+    pub fn rasterizeCharUtf32(font: *Font, cp: u32, subpixel: Subpixel) !*const Glyph {
+        return fcft_rasterize_char_utf32(font, cp, subpixel) orelse error.NoGlyph;
     }
 
     extern fn fcft_rasterize_grapheme_utf32(
-        self: *Font,
+        font: *Font,
         len: usize,
         grapheme_cluster: [*]const u32,
         subpixel: Subpixel,
     ) ?*const Grapheme;
     pub fn rasterizeGraphemeUtf32(
-        self: *Font,
+        font: *Font,
         grapheme_cluster: []const u32,
         subpixel: Subpixel,
     ) !*const Grapheme {
         return fcft_rasterize_grapheme_utf32(
-            self,
+            font,
             grapheme_cluster.len,
             grapheme_cluster.ptr,
             subpixel,
@@ -123,17 +123,17 @@ pub const Font = extern struct {
     }
 
     extern fn fcft_rasterize_text_run_utf32(
-        self: *Font,
+        font: *Font,
         len: usize,
         text: [*]const u32,
         subpixel: Subpixel,
     ) ?*const TextRun;
-    pub fn rasterizeTextRunUtf32(self: *Font, text: []const u32, subpixel: Subpixel) !*const TextRun {
-        return fcft_rasterize_text_run_utf32(self, text.len, text.ptr, subpixel) orelse error.NoTextRun;
+    pub fn rasterizeTextRunUtf32(font: *Font, text: []const u32, subpixel: Subpixel) !*const TextRun {
+        return fcft_rasterize_text_run_utf32(font, text.len, text.ptr, subpixel) orelse error.NoTextRun;
     }
 
     extern fn fcft_kerning(
-        self: *Font,
+        font: *Font,
         left: u32,
         right: u32,
         noalias x: ?*c_long,
@@ -142,7 +142,7 @@ pub const Font = extern struct {
     pub const kerning = fcft_kerning;
 
     extern fn fcft_precompose(
-        self: *const Font,
+        font: *const Font,
         base: u32,
         comb: u32,
         base_is_from_primary: bool,
@@ -154,7 +154,7 @@ pub const Font = extern struct {
     // DEPRECATED in 3.2.0
     // Note: this function does not clear the glyph or grapheme caches, call
     // before rasterizing any glyphs.
-    extern fn fcft_set_emoji_presentation(self: *Font, presentation: EmojiPresentation) void;
+    extern fn fcft_set_emoji_presentation(font: *Font, presentation: EmojiPresentation) void;
     pub const setEmojiPresentation = fcft_set_emoji_presentation;
 };
 
