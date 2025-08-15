@@ -196,10 +196,10 @@ pub const FontOptions = extern struct {
     pub const destroy = fcft_font_options_destroy;
 
     extern fn fcft_from_name2(
-        options: *const FontOptions,
         count: usize,
         names: [*][*:0]const u8,
         attributes: ?[*:0]const u8,
+        options: *const FontOptions,
     ) ?*Font;
     pub fn fromName2(options: *const FontOptions, names: [][*:0]const u8, attributes: ?[*:0]const u8) !*Font {
         return fcft_from_name2(names.len, names.ptr, attributes, options) orelse error.NoFont;
