@@ -9,8 +9,8 @@
     },
     .dependencies = .{
         .pixman = .{
-            .url = "https://codeberg.org/ifreund/zig-pixman/archive/v0.3.0.tar.gz",
-            .hash = "pixman-0.3.0-LClMnz2VAAAs7QSCGwLimV5VUYx0JFnX5xWU6HwtMuDX",
+            .url = "git+https://github.com/0x4A4FRN/zig-pixman.git#387f04a0289a69d159c88b5f70396ec12a8ddb00",
+            .hash = "pixman-0.4.0-dev-LClMn0eVAAAlXnMK-MVBZkOG0urNdOPGVQdaGecXPM5O",
         },
     },
     .fingerprint = 0x11577bbe0b7acccd,
